@@ -1,0 +1,41 @@
+main{
+    background: cornsilk;
+}
+article{
+    font-family: "Century Gothic";
+    padding-left: 30px;
+}
+form{
+    padding: 30px;
+    height: 300px;
+    width: 300px;
+    margin: auto;
+}
+
+label{
+
+    font-family: "Century Gothic";
+}
+input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.button input{
+    font-size: 16px;
+    padding: 10px;
+    font-size: 16px;
+    background: lavender;
+    border-radius: 2px;
+    font-family: "Century Gothic";
+    border: lavender;
+    color: darkslategrey;
+}
+
+.field{
+padding: 10px;
+}
+
+div {
+    padding: 10px;
+    font-family: "Century Gothic";
+}
