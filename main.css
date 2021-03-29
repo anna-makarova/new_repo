@@ -1,41 +1,43 @@
-main{
+.menu {
     background: cornsilk;
+    margin: -8px;
 }
-article{
+h2 {
     font-family: "Century Gothic";
     padding-left: 30px;
+    padding-top: 30px;
+    margin-block-start: -1em;
+    margin-block-end: -1em;
 }
-form{
+form {
     padding: 30px;
     height: 300px;
     width: 300px;
     margin: auto;
 }
-
-label{
-
+label {
     font-family: "Century Gothic";
 }
-input{
+input {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.button input{
+.submit-container {
+    padding: 10px;
+}
+.submit-container input {
     font-size: 16px;
     padding: 10px;
-    font-size: 16px;
     background: lavender;
     border-radius: 2px;
     font-family: "Century Gothic";
     border: lavender;
-    color: darkslategrey;
+    color: #2f4f4f;
 }
-
-.field{
-padding: 10px;
+.field {
+    padding: 10px;
 }
-
-div {
+.link {
     padding: 10px;
     font-family: "Century Gothic";
 }
