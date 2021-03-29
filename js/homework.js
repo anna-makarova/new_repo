@@ -18,7 +18,7 @@ function abProblem(a, b) {
         console.log(c)
 }
 
-abProblem('hehe', 20)
+abProblem (10, 20)
  
 /**
  * Определяет век по году
