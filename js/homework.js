@@ -15,7 +15,7 @@ function abProblem(a, b) {
     }else if (typeof b !== 'number') {
         throw new Error('this is not a number');
     }else
-        console.log(c)
+        console.log('Сумма чисел ' + c)
 }
 
 abProblem (10, 20)
@@ -31,13 +31,14 @@ abProblem (10, 20)
 // ДОБАВИТЬ ПРАВИЛЬНУЮ ОБРАБОТКУ ИСКЛЮЧЕНИЙ
 function centuryByYearProblem(year) {
     // Ваше решение
+    let v;
     if (typeof year !== 'number') {
         throw new Error('это не число');
     } else if (year <=0) {
         throw new Error('значение не может быть отрицательным');
-    }
-   let v = Math.floor((year-1)/100) + 1;
-   console.log(v);
+    } else
+   v = Math.floor((year-1)/100) + 1;
+   console.log('Год соответствует ' + v + ' году');
 }
 centuryByYearProblem(2001)
 
@@ -51,6 +52,7 @@ centuryByYearProblem(2001)
  */
 function colorsProblem(hexColor) {
     // Ваше решение
+
 }
  
 /**
@@ -62,7 +64,23 @@ function colorsProblem(hexColor) {
  */
 function fibonacciProblem(n) {
     // Ваше решение
+    let a = 1; //fib(1)
+    let b = 1; //fib(2)
+    if (typeof n !== 'number') {
+        throw new TypeError('это не число');
+    } else if (n < 0 || (n ^ 0) !== n) {
+        Number.isInteger(n)
+        throw new RangeError('значение должно быть целым положительным числом');
+    }
+    for (let i = 3; i <= n; i++) {
+        let n = a + b;
+        a = b;
+        b = n;
+    }
+   console.log('Число Фибоначи '+ b);
 }
+
+fibonacciProblem(7)
  
 /**
  * Транспонирует матрицу
@@ -72,7 +90,7 @@ function fibonacciProblem(n) {
  */
 function matrixProblem(matrix) {
     // Ваше решение
-    throw new TypeError("somethign wrong");
+
 }
  
 /**
@@ -85,8 +103,14 @@ function matrixProblem(matrix) {
  */
 function numberSystemProblem(n, targetNs) {
     // Ваше решение
+    if (typeof n !== 'number' || typeof targetNs !== 'number' ) {
+          throw new TypeError('это не число');
+    } else if (targetNs <2 || targetNs >36) {
+          throw new RangeError('значение не находится в диапазоне от 2 до 36');
+    }
+    console.log('Число ' + n + ' в ' + targetNs + ' системе счисления = ' + (n).toString(targetNs));
 }
- 
+ numberSystemProblem(17, 36)
 /**
  * Проверяет соответствие телефонного номера формату
  * @param {String} phoneNumber Номер телефона в формате '8–800–xxx–xx–xx'
@@ -105,8 +129,18 @@ function phoneProblem(phoneNumber) {
  */
 function smilesProblem(text) {
     // Ваше решение
+    let amount = 0;
+    let found = ':-)'
+    if (typeof text !== 'string') {
+        throw new TypeError()
+    } else
+    for (let i=0; i < text.length; i++) {
+        if (text[i] === found) amount++;
+    }
+
+    console.log('Число смайликов в строке = ' + amount)
 }
- 
+ smilesProblem ('Это тестовый текст :-)')
 /**
  * Определяет победителя в игре "Крестики-нолики"
  * Тестами гарантируются корректные аргументы.
