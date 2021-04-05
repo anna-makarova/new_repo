@@ -9,16 +9,13 @@ h2 {
     margin-block-start: -1em;
     margin-block-end: -1em;
 }
-form {
+.form-login {
     padding: 30px;
     height: 300px;
     width: 300px;
     margin: auto;
 }
-label {
-    font-family: "Century Gothic";
-}
-input {
+.data {
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -36,6 +33,7 @@ input {
 }
 .field {
     padding: 10px;
+    font-family: "Century Gothic";
 }
 .link {
     padding: 10px;
