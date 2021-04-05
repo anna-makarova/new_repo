@@ -9,16 +9,24 @@
  */
 function abProblem(a, b) {
     // Ваше решение
-    let c = a + b
-    if (typeof a !== 'number') {
-        throw new Error('this is not a number');
-    }else if (typeof b !== 'number') {
-        throw new Error('this is not a number');
-    }else
-        console.log('Сумма чисел ' + c)
+    checkNumber(a);
+    checkNumber(b);
+    return (a + b);
+
 }
 
-abProblem (10, 20)
+function checkNumber(number) {
+    if (typeof number !== 'number') {
+        throw new Error('this is not a number');
+    }
+}
+
+try {
+    abProblem(10, 20)
+} catch (e) {
+    console.log(e)
+}
+
  
 /**
  * Определяет век по году
@@ -38,7 +46,7 @@ function centuryByYearProblem(year) {
         throw new Error('значение не может быть отрицательным');
     } else
    v = Math.floor((year-1)/100) + 1;
-   console.log('Год соответствует ' + v + ' году');
+   console.log('Год соответствует ' + v + ' веку');
 }
 centuryByYearProblem(2001)
 
@@ -77,7 +85,8 @@ function fibonacciProblem(n) {
         a = b;
         b = n;
     }
-   console.log('Число Фибоначи '+ b);
+   console.log('Число Фибоначи ' + b);
+    return b;
 }
 
 fibonacciProblem(7)
@@ -108,7 +117,9 @@ function numberSystemProblem(n, targetNs) {
     } else if (targetNs <2 || targetNs >36) {
           throw new RangeError('значение не находится в диапазоне от 2 до 36');
     }
+
     console.log('Число ' + n + ' в ' + targetNs + ' системе счисления = ' + (n).toString(targetNs));
+    return (n).toString(targetNs);
 }
  numberSystemProblem(17, 36)
 /**
@@ -129,18 +140,27 @@ function phoneProblem(phoneNumber) {
  */
 function smilesProblem(text) {
     // Ваше решение
-    let amount = 0;
-    let found = ':-)'
-    if (typeof text !== 'string') {
-        throw new TypeError()
-    } else
-    for (let i=0; i < text.length; i++) {
-        if (text[i] === found) amount++;
+    checkString(text);
+    let count = 0;
+    let found = text.indexOf(':-)')
+    while (found !== -1) {
+        count++;
+        found = text.indexOf(':-)', found + 1);
     }
-
-    console.log('Число смайликов в строке = ' + amount)
+    console.log('Число смайликов ' + count);
+    return count;
 }
- smilesProblem ('Это тестовый текст :-)')
+    function checkString (string){
+        if (typeof string !== 'string') {
+            throw new TypeError();
+    }
+}
+try {
+    smilesProblem ('Это тестовый текст :-) и другой тестовый текст: :-)')
+} catch (e) {
+    console.log(e)
+}
+
 /**
  * Определяет победителя в игре "Крестики-нолики"
  * Тестами гарантируются корректные аргументы.
@@ -148,5 +168,6 @@ function smilesProblem(text) {
  * @returns {'x' | 'o' | 'draw'} Результат игры
  */
 function ticTacToeProblem(field) {
-    // Ваше решение
+
 }
+    // Ваше решение
