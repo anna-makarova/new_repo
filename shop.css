@@ -1,0 +1,41 @@
+.main {
+    background: #e0e6de;
+    margin: -8px;
+    font-family: "Century Gothic";
+}
+.cbx {
+
+}
+.card {
+    margin: 20px;
+    padding: 20px;
+    background: lemonchiffon;
+}
+.items {
+    height: 300px;
+    width: 300px;
+}
+.category {
+    color: darkcyan;
+}
+.name {
+    font-weight: bold;
+}
+.small-text {
+    display: none;
+}
+.cbx:checked ~ .container .card {
+    display: inline-block;
+    width: 25%;
+
+}
+.cbx:checked ~ .container .card .items {
+    object-fit: cover;
+}
+.cbx:checked ~ .container .big-text {
+    display: none;
+}
+.cbx:checked ~ .container .small-text {
+    display: block;
+}
+
