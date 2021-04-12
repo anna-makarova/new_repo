@@ -3,8 +3,13 @@
     margin: -8px;
     font-family: "Century Gothic";
 }
-.cbx {
+.container {
+    padding: 10px;
+}
 
+
+.cbx {
+    padding: 5px;
 }
 .card {
     margin: 20px;
@@ -30,7 +35,9 @@
 
 }
 .cbx:checked ~ .container .card .items {
+    width: 100%;
     object-fit: cover;
+    margin: auto;
 }
 .cbx:checked ~ .container .big-text {
     display: none;
