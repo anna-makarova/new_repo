@@ -1,13 +1,13 @@
+body{
+    margin: 0;
+}
 .main {
     background: #e0e6de;
-    margin: -8px;
     font-family: "Century Gothic";
 }
 .container {
     padding: 10px;
 }
-
-
 .cbx {
     padding: 5px;
 }
@@ -16,7 +16,7 @@
     padding: 20px;
     background: lemonchiffon;
 }
-.items {
+.pictures {
     height: 300px;
     width: 300px;
 }
@@ -32,9 +32,8 @@
 .cbx:checked ~ .container .card {
     display: inline-block;
     width: 25%;
-
 }
-.cbx:checked ~ .container .card .items {
+.cbx:checked ~ .container .card .pictures {
     width: 100%;
     object-fit: cover;
     margin: auto;
