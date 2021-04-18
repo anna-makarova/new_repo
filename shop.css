@@ -16,9 +16,13 @@ body{
     padding: 20px;
     background: lemonchiffon;
 }
-.pictures {
+.pictures_1 {
+    position: relative;
+}
+.pic {
     height: 300px;
     width: 300px;
+    /*position: relative;*/
 }
 .category {
     color: darkcyan;
@@ -38,10 +42,30 @@ body{
     object-fit: cover;
     margin: auto;
 }
+.cbx:checked ~ .container .card .pictures_1 .pic {
+    width: 100%;
+    object-fit: cover;
+    margin: auto;
+}
 .cbx:checked ~ .container .big-text {
     display: none;
 }
 .cbx:checked ~ .container .small-text {
     display: block;
 }
+.likes{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 35px;
+}
+.popup {
+    top: 10px;
+    /*display: none;*/
+
+}
+.likes:hover ~ .popup {
+    display: block;
+}
+
 
