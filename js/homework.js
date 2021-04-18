@@ -232,11 +232,9 @@ let player;
             player = field[i][0];
         }
     }
-
     if (check(field[0][0], field[1][1], field[2][2])) {
         player =  field[0][0];
     }
-
     if (check(field[0][2], field[1][1], field[2][0])) {
         player =  field[0][2];
     }
@@ -244,15 +242,17 @@ let player;
         return '0|1'
     } else if (player === 'o') {
         return '1|0'
-    } else
+    } else {
         return 'No winner'
+    }
+
 }
 function check(a, b, c) {
     if (a !== 0 && a === b && a === c) {
         return true
     }
 }
-    console.log(ticTacToeProblem( [
+console.log(ticTacToeProblem( [
         ['x','o','x'],
         ['o','x','o'],
         ['o','x','o']
