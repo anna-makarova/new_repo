@@ -1,5 +1,5 @@
 'use strict';
- 
+
 /**
  * Складывает два целых числа
  * @param {Number} a Первое целое
@@ -27,7 +27,7 @@ try {
     console.log(e)
 }
 
- 
+
 /**
  * Определяет век по году
  * @param {Number} year Год, целое положительное число
@@ -45,10 +45,10 @@ function centuryByYearProblem(year) {
     } else if (year <=0) {
         throw new Error('значение не может быть отрицательным');
     } else
-   v = Math.floor((year-1)/100) + 1;
-   console.log('Год соответствует ' + v + ' веку');
+        v = Math.floor((year-1)/100) + 1;
+    return v;
 }
-centuryByYearProblem(2001)
+console.log('Год соответствует ' + centuryByYearProblem(2001) + ' веку');
 
 
 /**
@@ -60,9 +60,16 @@ centuryByYearProblem(2001)
  */
 function colorsProblem(hexColor) {
     // Ваше решение
+    let hex1 = hexColor.substring(1,3);
+    let hex2 = hexColor.substring(3,5);
+    let hex3 = hexColor.substring(5,7);
+    let r = parseInt(hex1,16);
+    let g = parseInt(hex2,16);
+    let b = parseInt(hex3,16);
+    return r + ',' + g + ',' + b;
 
 }
- 
+console.log(colorsProblem('#FFFFFF'));
 /**
  * Находит n-ое число Фибоначчи
  * @param {Number} n Положение числа в ряде Фибоначчи
@@ -85,23 +92,46 @@ function fibonacciProblem(n) {
         a = b;
         b = n;
     }
-   console.log('Число Фибоначи ' + b);
     return b;
 }
 
-fibonacciProblem(7)
- 
+console.log('Число Фибоначи ' + fibonacciProblem(7))
+
 /**
  * Транспонирует матрицу
- * @param {(Any[])[]} matrix Матрица размерности MxN
+ * @param {any[][]} matrix Матрица размерности MxN
  * @throws {TypeError} Когда в функцию передаётся не двумерный массив
- * @returns {(Any[])[]} Транспонированная матрица размера NxM
+ * @returns {(any[])[]} Транспонированная матрица размера NxM
  */
 function matrixProblem(matrix) {
     // Ваше решение
+    // [
+    //     [1,2,3] row
+    //     [4,5,6]
+    //     [7,8,9]
+    // ]
+    const {rowsCount, columnsCount} = parseNumber(matrix);
+    const result = [];
+    for (let columnNumber = 0; columnNumber < columnsCount; columnNumber++) {
+        const newRow = [];
+        for (let rowNumber = 0; rowNumber < rowsCount; rowNumber++) {
+            newRow.push(matrix[rowNumber][columnNumber])
+        }
+        result.push(newRow);
+    }
+    return result;
 
 }
- 
+
+function parseNumber(matrix) {
+    return {
+        rowsCount: matrix.length,
+        columnsCount: matrix[0].length
+    }
+}
+
+console.log('Транспонированная матрица ' + matrixProblem([[2,3,5],[2,3,5],[2,3,5]]));
+
 /**
  * Переводит число в другую систему счисления
  * @param {Number} n Число для перевода в другую систему счисления
@@ -113,15 +143,15 @@ function matrixProblem(matrix) {
 function numberSystemProblem(n, targetNs) {
     // Ваше решение
     if (typeof n !== 'number' || typeof targetNs !== 'number' ) {
-          throw new TypeError('это не число');
+        throw new TypeError('это не число');
     } else if (targetNs <2 || targetNs >36) {
-          throw new RangeError('значение не находится в диапазоне от 2 до 36');
+        throw new RangeError('значение не находится в диапазоне от 2 до 36');
     }
 
     console.log('Число ' + n + ' в ' + targetNs + ' системе счисления = ' + (n).toString(targetNs));
     return (n).toString(targetNs);
 }
- numberSystemProblem(17, 36)
+numberSystemProblem(17, 36)
 /**
  * Проверяет соответствие телефонного номера формату
  * @param {String} phoneNumber Номер телефона в формате '8–800–xxx–xx–xx'
@@ -130,8 +160,29 @@ function numberSystemProblem(n, targetNs) {
  */
 function phoneProblem(phoneNumber) {
     // Ваше решение
+    let arr = Array.from(phoneNumber);
+    if (arr.length === 15 && arr[5] === '-' && arr[9] === '-' && arr[12] === '-'){
+        console.log('Соответствует формату');
+        return true;
+    }
+    else{
+        console.log('Не соответствует формату');
+        return false;
+    }
 }
- 
+
+function checkStr(string) {
+    if (typeof string !== 'string') {
+        throw new TypeError('В качестве аргумента передана не строка')
+    }
+}
+
+try {
+    phoneProblem('8-800-567-46-37')
+}catch (e) {
+    console.log(e)
+}
+
 /**
  * Определяет количество улыбающихся смайликов ":-)" в строке
  * @param {String} text Строка в которой производится поиск
@@ -150,9 +201,9 @@ function smilesProblem(text) {
     console.log('Число смайликов ' + count);
     return count;
 }
-    function checkString (string){
-        if (typeof string !== 'string') {
-            throw new TypeError();
+function checkString (string){
+    if (typeof string !== 'string') {
+        throw new TypeError();
     }
 }
 try {
@@ -168,6 +219,44 @@ try {
  * @returns {'x' | 'o' | 'draw'} Результат игры
  */
 function ticTacToeProblem(field) {
+    // [
+    //     [x,x,o],
+    //     [o,x,o],
+    //     [o,o,x]
+    // ]
+let player;
+    for (let i = 0; i < 3; i++) {
+        if (check(field[0][i], field[1][i], field[2][i])) {
+            return field[0][i]
+        } else if (check(field[i][0], field[i][1], field[i][2])) {
+            player = field[i][0];
+        }
+    }
 
+    if (check(field[0][0], field[1][1], field[2][2])) {
+        player =  field[0][0];
+    }
+
+    if (check(field[0][2], field[1][1], field[2][0])) {
+        player =  field[0][2];
+    }
+    if (player === 'o') {
+        return '0|1'
+    } else if (player === 'o') {
+        return '1|0'
+    } else
+        return 'No winner'
 }
-    // Ваше решение
+function check(a, b, c) {
+    if (a !== 0 && a === b && a === c) {
+        return true
+    }
+}
+    console.log(ticTacToeProblem( [
+        ['x','o','x'],
+        ['o','x','o'],
+        ['o','x','o']
+    ]));
+
+
+
