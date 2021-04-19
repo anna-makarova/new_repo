@@ -22,7 +22,6 @@ body{
 .pic {
     height: 300px;
     width: 300px;
-    /*position: relative;*/
 }
 .category {
     color: darkcyan;
@@ -46,6 +45,7 @@ body{
     width: 100%;
     object-fit: cover;
     margin: auto;
+    box-shadow: inset 6px 0 white;
 }
 .cbx:checked ~ .container .big-text {
     display: none;
@@ -60,9 +60,17 @@ body{
     width: 35px;
 }
 .popup {
-    top: 10px;
-    /*display: none;*/
-
+    position: absolute;
+    right: 55px;
+    display: none;
+    width: 80px;
+    font-size: 12px;
+    background-color: #dedcdc;
+    bottom: 45px;
+    border-radius: 5px;
+    padding: 0 5px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #636762;
 }
 .likes:hover ~ .popup {
     display: block;
