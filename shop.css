@@ -45,7 +45,6 @@ body{
     width: 100%;
     object-fit: cover;
     margin: auto;
-    box-shadow: inset 6px 0 white;
 }
 .cbx:checked ~ .container .big-text {
     display: none;
