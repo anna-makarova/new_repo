@@ -12,7 +12,6 @@ function abProblem(a, b) {
     checkNumber(a);
     checkNumber(b);
     return (a + b);
-
 }
 
 function checkNumber(number) {
@@ -36,14 +35,13 @@ try {
  * @returns {Number} Век, полученный из года
  */
 
-// ДОБАВИТЬ ПРАВИЛЬНУЮ ОБРАБОТКУ ИСКЛЮЧЕНИЙ
 function centuryByYearProblem(year) {
     // Ваше решение
     let v;
     if (typeof year !== 'number') {
-        throw new Error('это не число');
+        throw new TypeError('это не число');
     } else if (year <=0) {
-        throw new Error('значение не может быть отрицательным');
+        throw new RangeError('значение не может быть отрицательным');
     } else
         v = Math.floor((year-1)/100) + 1;
     return v;
@@ -60,6 +58,7 @@ console.log('Год соответствует ' + centuryByYearProblem(2001) + 
  */
 function colorsProblem(hexColor) {
     // Ваше решение
+    checkHexColor(hexColor);
     let hex1 = hexColor.substring(1,3);
     let hex2 = hexColor.substring(3,5);
     let hex3 = hexColor.substring(5,7);
@@ -67,9 +66,22 @@ function colorsProblem(hexColor) {
     let g = parseInt(hex2,16);
     let b = parseInt(hex3,16);
     return r + ',' + g + ',' + b;
-
 }
-console.log(colorsProblem('#FFFFFF'));
+
+function checkHexColor(string){
+    if (typeof string !== 'string') {
+        throw new TypeError('это не строка');
+    }else if (string.length !== 7) {
+        throw new RangeError('не соответствует формату');
+    }
+}
+
+try {
+    colorsProblem('#A78BAA')
+}catch (e) {
+    console.log(e)
+}
+
 /**
  * Находит n-ое число Фибоначчи
  * @param {Number} n Положение числа в ряде Фибоначчи
@@ -83,7 +95,7 @@ function fibonacciProblem(n) {
     let b = 1; //fib(2)
     if (typeof n !== 'number') {
         throw new TypeError('это не число');
-    } else if (n < 0 || (n ^ 0) !== n) {
+    } else if (!Number.isInteger(n) || n < 1) {
         Number.isInteger(n)
         throw new RangeError('значение должно быть целым положительным числом');
     }
@@ -94,7 +106,6 @@ function fibonacciProblem(n) {
     }
     return b;
 }
-
 console.log('Число Фибоначи ' + fibonacciProblem(7))
 
 /**
@@ -120,7 +131,6 @@ function matrixProblem(matrix) {
         result.push(newRow);
     }
     return result;
-
 }
 
 function parseNumber(matrix) {
@@ -147,8 +157,6 @@ function numberSystemProblem(n, targetNs) {
     } else if (targetNs <2 || targetNs >36) {
         throw new RangeError('значение не находится в диапазоне от 2 до 36');
     }
-
-    console.log('Число ' + n + ' в ' + targetNs + ' системе счисления = ' + (n).toString(targetNs));
     return (n).toString(targetNs);
 }
 numberSystemProblem(17, 36)
@@ -160,20 +168,17 @@ numberSystemProblem(17, 36)
  */
 function phoneProblem(phoneNumber) {
     // Ваше решение
-    let arr = Array.from(phoneNumber);
-    if (arr.length === 15 && arr[5] === '-' && arr[9] === '-' && arr[12] === '-'){
-        console.log('Соответствует формату');
+    checkStr(phoneNumber);
+    if (phoneNumber.length === 15 && phoneNumber[5] === '-' && phoneNumber[9] === '-' && phoneNumber[12] === '-'){
         return true;
-    }
-    else{
-        console.log('Не соответствует формату');
+    } else{
         return false;
     }
 }
 
 function checkStr(string) {
     if (typeof string !== 'string') {
-        throw new TypeError('В качестве аргумента передана не строка')
+        throw new TypeError('В качестве аргумента передана не строка');
     }
 }
 
@@ -193,7 +198,7 @@ function smilesProblem(text) {
     // Ваше решение
     checkString(text);
     let count = 0;
-    let found = text.indexOf(':-)')
+    let found = text.indexOf(':-)');
     while (found !== -1) {
         count++;
         found = text.indexOf(':-)', found + 1);
@@ -206,6 +211,7 @@ function checkString (string){
         throw new TypeError();
     }
 }
+
 try {
     smilesProblem ('Это тестовый текст :-) и другой тестовый текст: :-)')
 } catch (e) {
@@ -224,7 +230,7 @@ function ticTacToeProblem(field) {
     //     [o,x,o],
     //     [o,o,x]
     // ]
-let player;
+    let player;
     for (let i = 0; i < 3; i++) {
         if (check(field[0][i], field[1][i], field[2][i])) {
             return field[0][i]
