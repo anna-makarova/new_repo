@@ -3,7 +3,7 @@ body{
 }
 .main {
     background: #e0e6de;
-    font-family: "Century Gothic";
+    font-family: "Century Gothic", sans-serif;
 }
 .container {
     padding: 10px;
@@ -36,15 +36,9 @@ body{
     display: inline-block;
     width: 25%;
 }
-.cbx:checked ~ .container .card .pictures {
-    width: 100%;
-    object-fit: cover;
-    margin: auto;
-}
 .cbx:checked ~ .container .card .pictures_1 .pic {
     width: 100%;
     object-fit: cover;
-    margin: auto;
 }
 .cbx:checked ~ .container .big-text {
     display: none;
