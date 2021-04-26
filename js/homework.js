@@ -16,7 +16,7 @@ function abProblem(a, b) {
 
 function checkNumber(number) {
     if (typeof number !== 'number') {
-        throw new Error('this is not a number');
+        throw new TypeError('this is not a number');
     }
 }
 
@@ -96,7 +96,6 @@ function fibonacciProblem(n) {
     if (typeof n !== 'number') {
         throw new TypeError('это не число');
     } else if (!Number.isInteger(n) || n < 1) {
-        Number.isInteger(n)
         throw new RangeError('значение должно быть целым положительным числом');
     }
     for (let i = 3; i <= n; i++) {
@@ -115,12 +114,6 @@ console.log('Число Фибоначи ' + fibonacciProblem(7))
  * @returns {(any[])[]} Транспонированная матрица размера NxM
  */
 function matrixProblem(matrix) {
-    // Ваше решение
-    // [
-    //     [1,2,3] row
-    //     [4,5,6]
-    //     [7,8,9]
-    // ]
     const {rowsCount, columnsCount} = parseNumber(matrix);
     const result = [];
     for (let columnNumber = 0; columnNumber < columnsCount; columnNumber++) {
@@ -160,6 +153,8 @@ function numberSystemProblem(n, targetNs) {
     return (n).toString(targetNs);
 }
 numberSystemProblem(17, 36)
+
+
 /**
  * Проверяет соответствие телефонного номера формату
  * @param {String} phoneNumber Номер телефона в формате '8–800–xxx–xx–xx'
@@ -167,13 +162,14 @@ numberSystemProblem(17, 36)
  * @returns {Boolean} Если соответствует формату, то true, а иначе false
  */
 function phoneProblem(phoneNumber) {
-    // Ваше решение
     checkStr(phoneNumber);
-    if (phoneNumber.length === 15 && phoneNumber[5] === '-' && phoneNumber[9] === '-' && phoneNumber[12] === '-'){
-        return true;
-    } else{
-        return false;
-    }
+    return isPhoneNumberCorrect(phoneNumber);
+}
+function isPhoneNumberCorrect(phoneNumber) {
+    return phoneNumber.length === 15 &&
+        phoneNumber[5] === '-' &&
+        phoneNumber[9] === '-' &&
+        phoneNumber[12] === '-';
 }
 
 function checkStr(string) {
@@ -225,32 +221,21 @@ try {
  * @returns {'x' | 'o' | 'draw'} Результат игры
  */
 function ticTacToeProblem(field) {
-    // [
-    //     [x,x,o],
-    //     [o,x,o],
-    //     [o,o,x]
-    // ]
-    let player;
     for (let i = 0; i < 3; i++) {
         if (check(field[0][i], field[1][i], field[2][i])) {
             return field[0][i]
         } else if (check(field[i][0], field[i][1], field[i][2])) {
-            player = field[i][0];
+            return field[i][0];
         }
     }
     if (check(field[0][0], field[1][1], field[2][2])) {
-        player =  field[0][0];
+        return field[0][0];
     }
     if (check(field[0][2], field[1][1], field[2][0])) {
-        player =  field[0][2];
+        return field[0][2];
     }
-    if (player === 'o') {
-        return '0|1'
-    } else if (player === 'o') {
-        return '1|0'
-    } else {
-        return 'No winner'
-    }
+
+    return 'draw';
 
 }
 function check(a, b, c) {
@@ -262,7 +247,4 @@ console.log(ticTacToeProblem( [
         ['x','o','x'],
         ['o','x','o'],
         ['o','x','o']
-    ]));
-
-
-
+]));
