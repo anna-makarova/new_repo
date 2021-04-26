@@ -24,12 +24,17 @@
  * @param {Number} history[].value - Сумма, задоначенная пользователем
  */
 function printUsersDistinct(history) {
-    let newHistory = [];
-    newHistory = new Set(history.map(person => person.username));
-    return newHistory;
+    const uniqueUsernames = new Set(history.map(person => person.username));
+    for (const username of uniqueUsernames) {
+        console.log(username);
+    }
 }
-console.log(printUsersDistinct([{ username: "Max", value: 10 }, { username: "Alice", value: 50 }, { username: "Max", value: 45 }, { username: "Irina", value: 45 }]))
-
+printUsersDistinct([
+    { username: "Max", value: 10 },
+    { username: "Alice", value: 50 },
+    { username: "Max", value: 45 },
+    { username: "Irina", value: 45 }
+]);
 /**
  * Пусть у нас есть какой-то стример, и этому стримеру периодически донатят.
  * Разные пользователи могут донатить разное кол-во раз и разное кол-во денег.
@@ -51,10 +56,34 @@ console.log(printUsersDistinct([{ username: "Max", value: 10 }, { username: "Ali
  * @param {Number} history[].value - Сумма, задоначенная пользователем
  */
 function printMaxDonatingUser(history) {
+    // find all donations sum
+    let donations = new Map();  // username -> values_sum
+    for (const historyObject of history) {
+        if (donations.has(historyObject.username)) {
+            const oldValue = donations.get(historyObject.username);
+            donations.set(historyObject.username, oldValue + historyObject.value);
+        } else {
+            donations.set(historyObject.username, historyObject.value);
+        }
+    }
 
+    // find max donated user
+    let maxValue = -1;
+    let usernameWithMaxValue = null;
+    for (const [username, valueSum] of donations) {
+        if (maxValue < valueSum) {
+            maxValue = valueSum;
+            usernameWithMaxValue = username;
+        }
+    }
+
+    console.log(usernameWithMaxValue + " - " + maxValue);
 }
-console.log(printMaxDonatingUser([{ username: "Max", value: 10 }, { username: "Alice", value: 50 }, { username: "Max", value: 45 }]));
-
+printMaxDonatingUser([
+    { username: "Max", value: 10 },
+    { username: "Alice", value: 50 },
+    { username: "Max", value: 45 }
+]);
 
 /**
  * Необходимо найти сумму всех чисел, лежащих между 0 и n, и вывести ее на консоль.
@@ -68,13 +97,17 @@ console.log(printMaxDonatingUser([{ username: "Max", value: 10 }, { username: "A
  * @param {Number} n
  */
 function printSumFromZeroToN(n) {
-    let startArr = [0];
-    for (let i = 1; i <= n; i++) {
-        startArr.push(i);
+    const term = n > 0 ? 1 : -1;
+
+    let sum = 0;
+    for (let i = 0; Math.abs(i) <= Math.abs(n); i += term) {
+        sum += i;
     }
-    return startArr.reduce((total, i) => total + i, 0);
+
+    return sum;
 }
-console.log(printSumFromZeroToN(25))
+console.log(printSumFromZeroToN(10));
+
 /**
  * На вход дан массив, содержащий какое-то кол-во массивов чисел (как минимум один).
  * Необходимо вывести на консоль все числа через пробел в увеличивающейся последовательности.
@@ -93,9 +126,14 @@ console.log(printSumFromZeroToN(25))
  * @param {Number[][]} arrays - массив массивов чисел
  */
 function sortArrayOfArrays(arrays) {
-   let oneArr = arrays.flat();
-   oneArr.sort(compareNumbers);
-   return oneArr;
+    const allNumbers = [];
+    for (const array of arrays) {
+        for (const number of array) {
+            allNumbers.push(number);
+        }
+    }
+
+    return allNumbers.sort(compareNumbers);
 }
 
 function compareNumbers(a, b) {
@@ -130,8 +168,8 @@ console.log(sortArrayOfArrays([[3, 12, 1],[6, 9, 5]]))
  * @param {String} people[].lastname
  */
 function sortPeople(people) {
-    let newPeople = people.map(person => `${person.lastname} ${person.firstname}`);
-    newPeople.sort();
-    return newPeople;
+    return people
+        .map(person => `${person.lastname} ${person.firstname}`)
+        .sort();
 }
 console.log(sortPeople([{ firstname: "Ivan", lastname: "Ivanov" }, { firstname: "Alex", lastname: "Ivanov" }, { firstname: "Max", lastname: "Bobrov" }]));
