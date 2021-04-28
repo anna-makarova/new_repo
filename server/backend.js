@@ -143,3 +143,17 @@ function getLikesForUsername(username) {
 function likeOrUnlikeGood(username, orderId) {
     // TODO: реализовать
 }
+
+
+
+module.exports = {
+    logUp,
+    logIn,
+    getAllGoods,
+    getGoodsWithCategories,
+    getGoodsContainingText,
+    getGoodsWithIds,
+    getLikesCount,
+    getLikesForUsername,
+    likeOrUnlikeGood
+}
