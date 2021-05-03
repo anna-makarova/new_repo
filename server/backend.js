@@ -11,12 +11,7 @@
  * @type {Map<string, Object>}
  */
 const users = new Map();
-users.set('Anna', 'smth')
-users.set('Mike', 'smth1')
-users.set('Ella', 'smth2')
-users.set('John', 'smth3')
 
-console.log(users)
 /**
  * Содержит список существующих товаров.
  *
@@ -94,13 +89,18 @@ const goods = [
 function logUp({ username, password }) {
     let likedGoods = new Set();
     if (users.has(username)) {
-        throw new Error()
+        throw new Error();
     } else {
-        users.set(username, {password, likedGoods})
+        users.set(username, {password, likedGoods});
     }
-    console.log(users)
 }
-logUp({username:'smbd', password:'smth1'})
+logUp({username:'Anna', password:'anna-pass'})
+logUp({username:'John', password:'john-pass'})
+logUp({username:'Smith', password:'smith-pass'})
+logUp({username:'Ella', password:'ella-pass'})
+logUp({username:'Max', password:'max-pass'})
+logUp({username:'Ed', password:'ed-pass'})
+
 /**
  * Ищет в users пользователя username и проверяет его пароль.
  *
@@ -114,15 +114,13 @@ logUp({username:'smbd', password:'smth1'})
  */
 function logIn({ username, password }) {
     if (users.has(username) && password === users.get(username)) {
-        return ('OK')
+        return ('OK');
     }
     else{
-        throw new Error()
+        throw new Error();
     }
 }
-console.log(logIn({username: 'Anna', password: 'smth'}))
-
-
+logIn({username: 'Anna', password: 'anna-pass'})
 
 // ========
 // Товары
@@ -136,8 +134,6 @@ function getAllGoods() {
     return goods;
 }
 
-// console.log(getAllGoods())
-
 /**
  * Возвращает список всех товаров (с их ид, навзанием и пр.), у которых есть все категории,
  * указанные в categories. Если таких товаров нет, то возвращает пустой список
@@ -146,27 +142,19 @@ function getAllGoods() {
  * @returns {Object[]}
  */
 function getGoodsWithCategories(categories) {
-     // return goods.filter(function(item) { return item.categories === categories })
     let goodsWithCat = [];
-    let haveAllCategories = true;
-    let a = 0;
-    let b = 0;
-    for (const item of goods){
-        a = categories.length
-        b = item.categories.length
+    for (const item of goods) {
         if (categories.length === item.categories.length) {
             for (const element of categories) {
-                 if (item.categories.includes(element)){
-                     haveAllCategories=true
+                if (item.categories.includes(element)) {
+                    goodsWithCat.push(item);
                 }
             }
         }
     }
-    console.log(a,b)
-    return goodsWithCat
-
+    return goodsWithCat;
 }
-console.log(getGoodsWithCategories(['краска', 'акрил']))
+getGoodsWithCategories(['краска', 'акрил'])
 
 /**
  *
@@ -177,15 +165,15 @@ console.log(getGoodsWithCategories(['краска', 'акрил']))
  * @returns {Object[]}
  */
 function getGoodsContainingText(text) {
-    let goodsWithText = []
+    let goodsWithText = [];
     for (const item of goods){
         if (item.name.includes(text) || item.shortDescription.includes(text) || item.longDescription.includes(text)){
-            goodsWithText.push(item)
+            goodsWithText.push(item);
         }
     }
-    return goodsWithText
+    return goodsWithText;
 }
-console.log(getGoodsContainingText('кисть плоская'))
+getGoodsContainingText('кисть плоская')
 
 /**
  * Возвращает список товаров, у которых id содержится в ids.
@@ -194,41 +182,19 @@ console.log(getGoodsContainingText('кисть плоская'))
  * @returns {Object[]}
  */
 function getGoodsWithIds(ids) {
-    let goodsWithIds = []
+    let goodsWithIds = [];
     for (const item of goods) {
         if (ids.has(item.id)) {
-            goodsWithIds.push(item)
+            goodsWithIds.push(item);
         }
     }
-    return goodsWithIds
+    return goodsWithIds;
 }
-console.log(getGoodsWithIds(new Set([1,5,6])))
-/**
- * Высчитывает кол-во лайков для товара с идентификатором goodId.
- *
- * @param goodId
- * @returns {Number} Кол-во лайков на товаре
- */
-function getLikesCount(goodId) {
-    // TODO: реализовать
-}
-
-
+getGoodsWithIds(new Set([1,5,6]))
 
 // ========
 // Лайки
 // ========
-
-/**
- * Возвращает список идентификаторов товаров, лайкнутых пользователем.
- *
- * @param {String} username Имя пользователя, для которого ищем лайкнутые товары
- * @returns {Number[]} Список лайкнутых пользователем товаров
- */
-function getLikesForUsername(username) {
-
-}
-
 /**
  * Если пользователь еще не лайкал товар, с переданным orderId,
  * то этот orderId добавляется с список лайков пользователя.
@@ -241,12 +207,45 @@ function getLikesForUsername(username) {
  * @param {Number} orderId Ид товара, для которого поставили/сняли лайк
  */
 function likeOrUnlikeGood(username, orderId) {
-    const userObject = users.get(username)
+    const userObject = users.get(username);
     if (userObject.likedGoods.has(orderId)) {
-        userObject.likedGoods.delete(orderId)
+        userObject.likedGoods.delete(orderId);
     } else {
-        userObject.likedGoods.add(orderId)
+        userObject.likedGoods.add(orderId);
     }
-    console.log(userObject.likedGoods, userObject.likedGoods.size)
 }
-(likeOrUnlikeGood('smbd', 8))
+likeOrUnlikeGood('Anna', 6)
+likeOrUnlikeGood('Anna', 3)
+likeOrUnlikeGood('John', 6)
+likeOrUnlikeGood('Max', 1)
+likeOrUnlikeGood('Max', 2)
+
+/**
+ * Возвращает список идентификаторов товаров, лайкнутых пользователем.
+ *
+ * @param {String} username Имя пользователя, для которого ищем лайкнутые товары
+ * @returns {Number[]} Список лайкнутых пользователем товаров
+ */
+function getLikesForUsername(username) {
+    const userObject = users.get(username);
+    return userObject.likedGoods;
+}
+getLikesForUsername('Max')
+
+/**
+ * Высчитывает кол-во лайков для товара с идентификатором goodId.
+ *
+ * @param goodId
+ * @returns {Number} Кол-во лайков на товаре
+ */
+function getLikesCount(goodId) {
+    let amountLikes = 0;
+    for (const [username, userObject] of users) {
+        const likedGoods = userObject.likedGoods;
+        if (likedGoods.has(goodId)){
+            amountLikes++;
+        }
+    }
+    return amountLikes;
+}
+console.log(getLikesCount(6))
