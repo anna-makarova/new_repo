@@ -27,6 +27,7 @@ console.log(users)
  */
 const goods = [
     {
+        id: 1,
         imagePath: "/img/acril.jpg",
         name: "Акриловая краска",
         categories: ['краска', 'акрил'],
@@ -34,13 +35,15 @@ const goods = [
         longDescription: 'Французская акриловая краска «Studio Acrylics» от PEBEO для рисования на металле, дереве, холсте, картоне. Краски хорошо смешиваются, не смываются после высыхания, светостойкие, с хорошей адгезией. Благодаря своей густоте, краска сохраняет следы кисти или мастихина, подходит для создания объема. Краска готова к использованию.'
     },
     {
+        id: 2,
         imagePath: "/img/maslo.jpg",
         name: "Масляная краска",
-        categories: ['краска', 'масло'],
+        categories: ['краска', 'акрил'],
         shortDescription: 'Краска масляная Сонет, туба 46 мл, красная светлая № 336',
         longDescription: 'Масляные краски Сонет для живописи разработаны по традиционным технологиям с использованием современных материалов, качественных пигментов и связующего по новой рецептуре. Масло Сонет отличается яркостью, чистотой цвета, высокой светостойкостью и пастозностью. Дорогие неорганические пигменты заменены светостойкими органическими, при этом аналоги соответствуют оригинальным цветам по тону.'
     },
     {
+        id: 3,
         imagePath: "/img/pastel_2.jpg",
         name: "Пастель сухая",
         categories: ['пастель'],
@@ -48,6 +51,7 @@ const goods = [
         longDescription: 'Мягкая сухая пастель Mungyo подходит для новичков, а также для опытных художников. Подходит для работы с фоамираном, а также бумагой (картоном) и керамикой. После нанесения не требует дополнительного закрепления рисунка. Пастель изготовлена из пигментов высокого качества с добавлением карбоната кальция. Производитель: Корея'
     },
     {
+        id: 4,
         imagePath: "/img/kisti.jpg",
         name: "Кисти синтетика, набор",
         categories: ['кисти', 'кисти синтетика'],
@@ -55,6 +59,7 @@ const goods = [
         longDescription: 'Кисть плоская из волоса рыжей мягкой синтетики, обойма медная, хромированная.Ручка длинная, пропитана лаком. Используется для прорисовки прямых линий и прямоугольных форм.Тонкий волос прекрасно подходит для работы с жидкими красками. Кисти не заменимы для нанесения лака. Способна удерживать максимальное количество краски, исходя из того, на что способна синтетика.'
     },
     {
+        id: 5,
         imagePath: "/img/paper_3.jpg",
         name: "Бумага для масла и акрила",
         categories: ['бумага', 'масло', 'акрил'],
@@ -62,6 +67,7 @@ const goods = [
         longDescription: 'Бумага для масла "Tela" от Fabriano - это очень прочная высококачественная бумага-картон, с которой будет приятно работать и профессиональным художникам, и начинающим. Данаая бумага не содержит кислот и отбеливающих веществ. Впитывающие свойства бумаги достигаются особой слоистостью, которая ограничивает поглощение масла, связующих веществ и жидкости в допустимых и оптимальных размерах. Бумага имеет фактуру льняного золста и идеально подойдет для масляной живописи. '
     },
     {
+        id: 6,
         imagePath: "/img/paper_2.jpg",
         name: "Бумага для пастели",
         categories: ['бумага','пастель'],
@@ -86,24 +92,15 @@ const goods = [
  * @throws {Error} Когда пользователь с заданным именем уже существует
  */
 function logUp({ username, password }) {
-   //ВАРИАНТ 1
-    // let likedGoods = new Set();
-    // for (const userObject of users) {
-    //     if (users.has(userObject.username)) {
-    //         throw new Error()
-    //     } else {
-    //         users.set(userObject.username, userObject.password);
-    //     }
+    let likedGoods = new Set();
+    if (users.has(username)) {
+        throw new Error()
+    } else {
+        users.set(username, {password, likedGoods})
     }
-    //ВАРИАНТ 2
-    // if (users.has(username)) {
-    //     throw new Error()
-    // } else {
-    //     users.set(username, password)
-    // }
-//     console.log(users)
-// }
-// logUp({username:'Ella', password:'smth1'})
+    console.log(users)
+}
+logUp({username:'smbd', password:'smth1'})
 /**
  * Ищет в users пользователя username и проверяет его пароль.
  *
@@ -116,8 +113,14 @@ function logUp({ username, password }) {
  * @throws {Error} Когда заданного пользователя не существует или не подходит пароль
  */
 function logIn({ username, password }) {
-    // TODO: реализовать
+    if (users.has(username) && password === users.get(username)) {
+        return ('OK')
+    }
+    else{
+        throw new Error()
+    }
 }
+console.log(logIn({username: 'Anna', password: 'smth'}))
 
 
 
@@ -143,9 +146,27 @@ function getAllGoods() {
  * @returns {Object[]}
  */
 function getGoodsWithCategories(categories) {
-     return goods.filter(function(item) { return item.categories === categories })
+     // return goods.filter(function(item) { return item.categories === categories })
+    let goodsWithCat = [];
+    let haveAllCategories = true;
+    let a = 0;
+    let b = 0;
+    for (const item of goods){
+        a = categories.length
+        b = item.categories.length
+        if (categories.length === item.categories.length) {
+            for (const element of categories) {
+                 if (item.categories.includes(element)){
+                     haveAllCategories=true
+                }
+            }
+        }
+    }
+    console.log(a,b)
+    return goodsWithCat
+
 }
-console.log(getGoodsWithCategories(['пастель']))
+console.log(getGoodsWithCategories(['краска', 'акрил']))
 
 /**
  *
@@ -156,8 +177,15 @@ console.log(getGoodsWithCategories(['пастель']))
  * @returns {Object[]}
  */
 function getGoodsContainingText(text) {
-    // TODO: реализовать
+    let goodsWithText = []
+    for (const item of goods){
+        if (item.name.includes(text) || item.shortDescription.includes(text) || item.longDescription.includes(text)){
+            goodsWithText.push(item)
+        }
+    }
+    return goodsWithText
 }
+console.log(getGoodsContainingText('кисть плоская'))
 
 /**
  * Возвращает список товаров, у которых id содержится в ids.
@@ -166,9 +194,15 @@ function getGoodsContainingText(text) {
  * @returns {Object[]}
  */
 function getGoodsWithIds(ids) {
-    // TODO: реализовать
+    let goodsWithIds = []
+    for (const item of goods) {
+        if (ids.has(item.id)) {
+            goodsWithIds.push(item)
+        }
+    }
+    return goodsWithIds
 }
-
+console.log(getGoodsWithIds(new Set([1,5,6])))
 /**
  * Высчитывает кол-во лайков для товара с идентификатором goodId.
  *
@@ -192,7 +226,7 @@ function getLikesCount(goodId) {
  * @returns {Number[]} Список лайкнутых пользователем товаров
  */
 function getLikesForUsername(username) {
-    // TODO: реализовать
+
 }
 
 /**
@@ -207,5 +241,12 @@ function getLikesForUsername(username) {
  * @param {Number} orderId Ид товара, для которого поставили/сняли лайк
  */
 function likeOrUnlikeGood(username, orderId) {
-    // TODO: реализовать
+    const userObject = users.get(username)
+    if (userObject.likedGoods.has(orderId)) {
+        userObject.likedGoods.delete(orderId)
+    } else {
+        userObject.likedGoods.add(orderId)
+    }
+    console.log(userObject.likedGoods, userObject.likedGoods.size)
 }
+(likeOrUnlikeGood('smbd', 8))
