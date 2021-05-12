@@ -113,10 +113,9 @@ logUp({username:'Ed', password:'ed-pass'})
  * @throws {Error} Когда заданного пользователя не существует или не подходит пароль
  */
 function logIn({ username, password }) {
-    if (users.has(username) && password === users.get(username)) {
-        return ('OK');
-    }
-    else{
+    if (users.has(username) && password === users.get(username).password) {
+        return;
+    }else{
         throw new Error();
     }
 }
@@ -142,17 +141,17 @@ function getAllGoods() {
  * @returns {Object[]}
  */
 function getGoodsWithCategories(categories) {
-    let goodsWithCat = [];
+    let good = [];
+    let check = 0;
     for (const item of goods) {
-        if (categories.length === item.categories.length) {
-            for (const element of categories) {
-                if (item.categories.includes(element)) {
-                    goodsWithCat.push(item);
-                }
-            }
+        for (const element of categories) {
+            check = item.categories.includes(element);
+        }
+        if (check === true){
+            good.push(item)
         }
     }
-    return goodsWithCat;
+    return good;
 }
 getGoodsWithCategories(['краска', 'акрил'])
 
@@ -228,7 +227,7 @@ likeOrUnlikeGood('Max', 2)
  */
 function getLikesForUsername(username) {
     const userObject = users.get(username);
-    return userObject.likedGoods;
+    return Array.from(userObject.likedGoods);
 }
 getLikesForUsername('Max')
 
@@ -248,4 +247,4 @@ function getLikesCount(goodId) {
     }
     return amountLikes;
 }
-console.log(getLikesCount(6))
+getLikesCount(6)
