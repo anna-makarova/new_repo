@@ -5,24 +5,24 @@ body{
     background: #e0e6de;
     font-family: "Century Gothic", serif;
 }
-ul {
+.menu-string {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: rgba(39,91,39,0.84)
 }
-li {
+.menu-block {
     float: left;
 }
-li a {
+.menu-item {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
-li a:hover {
+.menu-item:hover {
     background-color: #295329;
 }
 .container {
