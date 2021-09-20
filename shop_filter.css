@@ -1,0 +1,121 @@
+body{
+    margin: 0;
+}
+.main {
+    background: #e0e6de;
+    font-family: "Century Gothic", serif;
+}
+.menu-string {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(39,91,39,0.84)
+}
+.menu-block {
+    float: left;
+}
+.menu-item {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.menu-item:hover {
+    background-color: #295329;
+}
+.container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.goods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.card {
+    margin: 10px;
+    padding: 20px;
+    background: lemonchiffon;
+    display: inline-block;
+    width: 25%;
+}
+.pictures {
+    position: relative;
+}
+.pic {
+    width: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+.category {
+    color: darkcyan;
+}
+.name {
+    font-weight: bold;
+}
+.big-text {
+    display: none;
+}
+.likes{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+}
+.popup {
+    position: absolute;
+    right: 55px;
+    display: none;
+    width: 80px;
+    font-size: 12px;
+    background-color: #dedcdc;
+    bottom: 45px;
+    border-radius: 5px;
+    padding: 0 5px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #636762;
+}
+.likes:hover ~ .popup {
+    display: block;
+}
+.filter {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(41,83,41,0.33);
+}
+.find {
+    margin: 20px 10px ;
+}
+.data{
+    background-color: ivory;
+    border-radius: 4px;
+}
+.filter-category {
+    margin: 10px;
+}
+.element {
+    margin: 10px;
+}
+.element-checkbox{
+    width: 15px;
+    height: 15px;
+}
+.submit-button {
+    background-color: ivory;
+    font-family: "Century Gothic", serif;
+    padding: 5px 7px;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color: #636762;
+    margin: 20px 10px;
+}
+.submit-button:hover {
+    background-color: beige;
+}
+
+
