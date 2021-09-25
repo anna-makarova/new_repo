@@ -13,7 +13,8 @@ const listener = {
      *
      * Может быть любого типа (не обязательно Object), какой посчитается более подходящим.
      */
-    handlers: {},  // TODO: implement
+    handlers: new Map(),
+
 
     /**
      * Регистрирует в своем поле handlers для события event обработчик handler.
@@ -25,7 +26,8 @@ const listener = {
      * @param {Function} handler - Обработчик события event для объекта context; не имеет входных параметров
      */
     on: function(event, context, handler) {
-        // TODO: implement
+         let handlerContext = [context, handler];
+         this.handlers.set(event, handlerContext);
     },
 
     /**
@@ -34,7 +36,7 @@ const listener = {
      * @param event - Событие, для которого должны выполниться зарегистрированные обработчики
      */
     submit: function(event) {
-        // TODO: implement
+
     }
 };
 
