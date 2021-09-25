@@ -33,7 +33,7 @@ const goods = [
         id: 2,
         imagePath: "/img/maslo.jpg",
         name: "Масляная краска",
-        categories: ['краска', 'акрил'],
+        categories: ['краска', 'масло'],
         shortDescription: 'Краска масляная Сонет, туба 46 мл, красная светлая № 336',
         longDescription: 'Масляные краски Сонет для живописи разработаны по традиционным технологиям с использованием современных материалов, качественных пигментов и связующего по новой рецептуре. Масло Сонет отличается яркостью, чистотой цвета, высокой светостойкостью и пастозностью. Дорогие неорганические пигменты заменены светостойкими органическими, при этом аналоги соответствуют оригинальным цветам по тону.'
     },
@@ -135,25 +135,24 @@ function getAllGoods() {
 
 /**
  * Возвращает список всех товаров (с их ид, навзанием и пр.), у которых есть все категории,
- * указанные в categories. Если таких товаров нет, то возвращает пустой список
+ * указанные в chosenCategories. Если таких товаров нет, то возвращает пустой список
  *
- * @param {String[]} categories Искомые категории
+ * @param {String[]} chosenCategories Искомые категории
  * @returns {Object[]}
  */
-function getGoodsWithCategories(categories) {
-    let good = [];
-    let check = 0;
+function getGoodsWithCategories(chosenCategories ) {
+    let result = new Set
     for (const item of goods) {
-        for (const element of categories) {
-            check = item.categories.includes(element);
-        }
-        if (check === true){
-            good.push(item)
+        for (const element of item.categories) {
+            if (item.categories.includes(chosenCategories)){
+                result = (item)
+           }
         }
     }
-    return good;
+    return result;
 }
-getGoodsWithCategories(['краска', 'акрил'])
+console.log(getGoodsWithCategories(['краска','акрил']))
+
 
 /**
  *
