@@ -14,8 +14,6 @@ const listener = {
      * Может быть любого типа (не обязательно Object), какой посчитается более подходящим.
      */
     handlers: new Map(),
-
-
     /**
      * Регистрирует в своем поле handlers для события event обработчик handler.
      * Потом, при вызове listener.submit(event), должен выполниться handler, а контекстом исполнения
@@ -29,14 +27,13 @@ const listener = {
          let handlerContext = [context, handler];
          this.handlers.set(event, handlerContext);
     },
-
     /**
      * Выполняет все обработчики, которые ранее были зарегистрированы для события event.
      *
      * @param event - Событие, для которого должны выполниться зарегистрированные обработчики
      */
     submit: function(event) {
-
+        this.handlers.get(event)[1].call(this.handlers.get(event)[0])
     }
 };
 
@@ -59,8 +56,11 @@ listener.on("boost", playerWithBoost, function() {
 });
 
 listener.submit("next_level");
-// После этого вызова: simplePlayer.score === 11, playerWithBoost.score === 12
+console.log(simplePlayer, playerWithBoost)
+
 listener.submit("boost");
-// После этого вызова: simplePlayer.score === 11, playerWithBoost.score === 15
+console.log(simplePlayer, playerWithBoost)
+
 listener.submit("next_level");
-// После этого вызова: simplePlayer.score === 12, playerWithBoost.score === 17
+console.log(simplePlayer, playerWithBoost)
+
