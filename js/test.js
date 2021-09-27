@@ -29,11 +29,13 @@ const listener = {
     },
     /**
      * Выполняет все обработчики, которые ранее были зарегистрированы для события event.
+     * Если для event не существует обработчиков, то не должно возникнуть ошибки, должен быть
+     * просто выход из метода.
      *
      * @param event - Событие, для которого должны выполниться зарегистрированные обработчики
      */
     submit: function(event) {
-        this.handlers.get(event)[1].call(this.handlers.get(event)[0])
+        this.handlers.get(event)[1].call(this.handlers.get(event)[0]);
     }
 };
 
