@@ -33,7 +33,7 @@ const goods = [
         id: 2,
         imagePath: "/img/maslo.jpg",
         name: "Масляная краска",
-        categories: ['краска', 'акрил'],
+        categories: ['краска', 'масло'],
         shortDescription: 'Краска масляная Сонет, туба 46 мл, красная светлая № 336',
         longDescription: 'Масляные краски Сонет для живописи разработаны по традиционным технологиям с использованием современных материалов, качественных пигментов и связующего по новой рецептуре. Масло Сонет отличается яркостью, чистотой цвета, высокой светостойкостью и пастозностью. Дорогие неорганические пигменты заменены светостойкими органическими, при этом аналоги соответствуют оригинальным цветам по тону.'
     },
@@ -148,10 +148,18 @@ function getGoodsWithCategories(categories) {
     return result;
 }
 function checkGoodWithCategories(item, categories) {
-    // TODO: Используй переменную для харнения промежуточного результата
+    let middle = 0;
+    for(const piece of categories){
+        if (item.categories.includes(piece)){
+            middle += 1;
+        }
+    }
+    if (middle === categories.length){
+        return true
+    }
 }
 
-getGoodsWithCategories(['краска', 'акрил'])
+console.log(getGoodsWithCategories(['краска', 'хз']))
 
 /**
  *
