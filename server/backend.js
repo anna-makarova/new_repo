@@ -149,12 +149,12 @@ function getGoodsWithCategories(categories) {
 }
 function checkGoodWithCategories(item, categories) {
     let middle = 0;
-    for(const piece of categories){
-        if (item.categories.includes(piece)){
+    for (const piece of categories) {
+        if (item.categories.includes(piece)) {
             middle += 1;
         }
     }
-    if (middle === categories.length){
+    if (middle === categories.length) {
         return true
     }
 }
