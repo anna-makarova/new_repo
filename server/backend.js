@@ -161,6 +161,7 @@ function checkGoodWithCategories(item, categories) {
 
 console.log(getGoodsWithCategories(['краска', 'хз']))
 
+
 /**
  *
  * Возвращает список товаров, у которых одно из полей
