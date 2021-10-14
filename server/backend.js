@@ -20,7 +20,55 @@ const users = new Map();
  *
  * @type {Object[]}
  */
-const goods = [];  // TODO: заполнить объектами товаров
+const goods = [
+    {
+        id: 1,
+        imagePath: "/img/acril.jpg",
+        name: "Акриловая краска",
+        categories: ['краска', 'акрил'],
+        shortDescription: 'Акриловые краски Studio Acrylics PEBEO, 100 мл',
+        longDescription: 'Французская акриловая краска «Studio Acrylics» от PEBEO для рисования на металле, дереве, холсте, картоне. Краски хорошо смешиваются, не смываются после высыхания, светостойкие, с хорошей адгезией. Благодаря своей густоте, краска сохраняет следы кисти или мастихина, подходит для создания объема. Краска готова к использованию.'
+    },
+    {
+        id: 2,
+        imagePath: "/img/maslo.jpg",
+        name: "Масляная краска",
+        categories: ['краска', 'масло'],
+        shortDescription: 'Краска масляная Сонет, туба 46 мл, красная светлая № 336',
+        longDescription: 'Масляные краски Сонет для живописи разработаны по традиционным технологиям с использованием современных материалов, качественных пигментов и связующего по новой рецептуре. Масло Сонет отличается яркостью, чистотой цвета, высокой светостойкостью и пастозностью. Дорогие неорганические пигменты заменены светостойкими органическими, при этом аналоги соответствуют оригинальным цветам по тону.'
+    },
+    {
+        id: 3,
+        imagePath: "/img/pastel_2.jpg",
+        name: "Пастель сухая",
+        categories: ['пастель'],
+        shortDescription: 'Mungyo пастель сухая мягкая квадратная (1/2 мелка), 32 цвета',
+        longDescription: 'Мягкая сухая пастель Mungyo подходит для новичков, а также для опытных художников. Подходит для работы с фоамираном, а также бумагой (картоном) и керамикой. После нанесения не требует дополнительного закрепления рисунка. Пастель изготовлена из пигментов высокого качества с добавлением карбоната кальция. Производитель: Корея'
+    },
+    {
+        id: 4,
+        imagePath: "/img/kisti.jpg",
+        name: "Кисти синтетика, набор",
+        categories: ['кисти', 'кисти синтетика'],
+        shortDescription: 'ROUBLOFF Серия 1222 (длинная ручка, жесткость 1из 4)',
+        longDescription: 'Кисть плоская из волоса рыжей мягкой синтетики, обойма медная, хромированная.Ручка длинная, пропитана лаком. Используется для прорисовки прямых линий и прямоугольных форм.Тонкий волос прекрасно подходит для работы с жидкими красками. Кисти не заменимы для нанесения лака. Способна удерживать максимальное количество краски, исходя из того, на что способна синтетика.'
+    },
+    {
+        id: 5,
+        imagePath: "/img/paper_3.jpg",
+        name: "Бумага для масла и акрила",
+        categories: ['бумага', 'масло', 'акрил'],
+        shortDescription: 'Блок бумаги для масла Fabriano Tela 300 г/м2, 30x40 см',
+        longDescription: 'Бумага для масла "Tela" от Fabriano - это очень прочная высококачественная бумага-картон, с которой будет приятно работать и профессиональным художникам, и начинающим. Данаая бумага не содержит кислот и отбеливающих веществ. Впитывающие свойства бумаги достигаются особой слоистостью, которая ограничивает поглощение масла, связующих веществ и жидкости в допустимых и оптимальных размерах. Бумага имеет фактуру льняного золста и идеально подойдет для масляной живописи. '
+    },
+    {
+        id: 6,
+        imagePath: "/img/paper_2.jpg",
+        name: "Бумага для пастели",
+        categories: ['бумага','пастель'],
+        shortDescription: 'LANA Бумага, 160 г/м2',
+        longDescription: 'Пастельная бумага Lana — это высококачественная французская бумага для пастели. Бумага имеет плотность 160г/м2, состав 45% хлопка и 55% целлюлозы. Пастельная бумага имеет ячеистую фактуру для работы пастелью, а обратная стороны гладкая. Бумага также подходит для каллиграфии, многие используют как бумагу для карточек, приглашений или работ по каллиграфии и леттеринга.'
+    }];
 
 
 
@@ -39,8 +87,19 @@ const goods = [];  // TODO: заполнить объектами товаров
  * @throws {Error} Когда пользователь с заданным именем уже существует
  */
 function logUp({ username, password }) {
-    // TODO: реализовать
+    let likedGoods = new Set();
+    if (users.has(username)) {
+        throw new Error();
+    } else {
+        users.set(username, {password, likedGoods});
+    }
 }
+logUp({username:'Anna', password:'anna-pass'})
+logUp({username:'John', password:'john-pass'})
+logUp({username:'Smith', password:'smith-pass'})
+logUp({username:'Ella', password:'ella-pass'})
+logUp({username:'Max', password:'max-pass'})
+logUp({username:'Ed', password:'ed-pass'})
 
 /**
  * Ищет в users пользователя username и проверяет его пароль.
@@ -54,10 +113,11 @@ function logUp({ username, password }) {
  * @throws {Error} Когда заданного пользователя не существует или не подходит пароль
  */
 function logIn({ username, password }) {
-    // TODO: реализовать
+    if (!users.has(username) || password !== users.get(username).password) {
+        throw new Error();
+    }
 }
-
-
+logIn({username: 'Anna', password: 'anna-pass'})
 
 // ========
 // Товары
@@ -79,10 +139,28 @@ function getAllGoods() {
  * @returns {Object[]}
  */
 function getGoodsWithCategories(categories) {
-    // TODO: реализовать
+    let result = [];
+    for (const item of goods) {
+        if (checkGoodWithCategories(item, categories)) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+function checkGoodWithCategories(item, categories) {
+    for (const piece of categories) {
+        if (!item.categories.includes(piece)) {
+            return false;
+        }
+    }
+    return true;
 }
 
+console.log(getGoodsWithCategories(['краска', 'хз']))
+
+
 /**
+ *
  * Возвращает список товаров, у которых одно из полей
  * name, shortDescription или longDescription содержит text.
  *
@@ -90,8 +168,15 @@ function getGoodsWithCategories(categories) {
  * @returns {Object[]}
  */
 function getGoodsContainingText(text) {
-    // TODO: реализовать
+    let goodsWithText = [];
+    for (const item of goods){
+        if (item.name.includes(text) || item.shortDescription.includes(text) || item.longDescription.includes(text)){
+            goodsWithText.push(item);
+        }
+    }
+    return goodsWithText;
 }
+getGoodsContainingText('кисть плоская')
 
 /**
  * Возвращает список товаров, у которых id содержится в ids.
@@ -100,35 +185,19 @@ function getGoodsContainingText(text) {
  * @returns {Object[]}
  */
 function getGoodsWithIds(ids) {
-    // TODO: реализовать
+    let goodsWithIds = [];
+    for (const item of goods) {
+        if (ids.has(item.id)) {
+            goodsWithIds.push(item);
+        }
+    }
+    return goodsWithIds;
 }
-
-/**
- * Высчитывает кол-во лайков для товара с идентификатором goodId.
- *
- * @param goodId
- * @returns {Number} Кол-во лайков на товаре
- */
-function getLikesCount(goodId) {
-    // TODO: реализовать
-}
-
-
+getGoodsWithIds(new Set([1,5,6]))
 
 // ========
 // Лайки
 // ========
-
-/**
- * Возвращает список идентификаторов товаров, лайкнутых пользователем.
- *
- * @param {String} username Имя пользователя, для которого ищем лайкнутые товары
- * @returns {Number[]} Список лайкнутых пользователем товаров
- */
-function getLikesForUsername(username) {
-    // TODO: реализовать
-}
-
 /**
  * Если пользователь еще не лайкал товар, с переданным orderId,
  * то этот orderId добавляется с список лайков пользователя.
@@ -141,5 +210,45 @@ function getLikesForUsername(username) {
  * @param {Number} orderId Ид товара, для которого поставили/сняли лайк
  */
 function likeOrUnlikeGood(username, orderId) {
-    // TODO: реализовать
+    const userObject = users.get(username);
+    if (userObject.likedGoods.has(orderId)) {
+        userObject.likedGoods.delete(orderId);
+    } else {
+        userObject.likedGoods.add(orderId);
+    }
 }
+likeOrUnlikeGood('Anna', 6)
+likeOrUnlikeGood('Anna', 3)
+likeOrUnlikeGood('John', 6)
+likeOrUnlikeGood('Max', 1)
+likeOrUnlikeGood('Max', 2)
+
+/**
+ * Возвращает список идентификаторов товаров, лайкнутых пользователем.
+ *
+ * @param {String} username Имя пользователя, для которого ищем лайкнутые товары
+ * @returns {Number[]} Список лайкнутых пользователем товаров
+ */
+function getLikesForUsername(username) {
+    const userObject = users.get(username);
+    return Array.from(userObject.likedGoods);
+}
+getLikesForUsername('Max')
+
+/**
+ * Высчитывает кол-во лайков для товара с идентификатором goodId.
+ *
+ * @param goodId
+ * @returns {Number} Кол-во лайков на товаре
+ */
+function getLikesCount(goodId) {
+    let amountLikes = 0;
+    for (const userObject of users.values()) {
+        const likedGoods = userObject.likedGoods;
+        if (likedGoods.has(goodId)){
+            amountLikes++;
+        }
+    }
+    return amountLikes;
+}
+getLikesCount(6)
