@@ -148,15 +148,12 @@ function getGoodsWithCategories(categories) {
     return result;
 }
 function checkGoodWithCategories(item, categories) {
-    let middle = 0;
     for (const piece of categories) {
-        if (item.categories.includes(piece)) {
-            middle += 1;
+        if (!item.categories.includes(piece)) {
+            return false;
         }
     }
-    if (middle === categories.length) {
-        return true
-    }
+    return true;
 }
 
 console.log(getGoodsWithCategories(['краска', 'хз']))
