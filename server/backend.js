@@ -1,3 +1,5 @@
+const GoodsFilterById = require("./filters/GoodsFilterById");
+
 // ========
 // Данные
 // ========
@@ -139,6 +141,7 @@ function getAllGoods() {
  * @returns {Object[]}
  */
 function getGoodsWithCategories(categories) {
+    // TODO: переписать на использование фильтра
     let result = [];
     for (const item of goods) {
         if (checkGoodWithCategories(item, categories)) {
@@ -168,6 +171,7 @@ console.log(getGoodsWithCategories(['краска', 'хз']))
  * @returns {Object[]}
  */
 function getGoodsContainingText(text) {
+    // TODO: переписать на использование фильтра
     let goodsWithText = [];
     for (const item of goods){
         if (item.name.includes(text) || item.shortDescription.includes(text) || item.longDescription.includes(text)){
@@ -185,13 +189,8 @@ getGoodsContainingText('кисть плоская')
  * @returns {Object[]}
  */
 function getGoodsWithIds(ids) {
-    let goodsWithIds = [];
-    for (const item of goods) {
-        if (ids.has(item.id)) {
-            goodsWithIds.push(item);
-        }
-    }
-    return goodsWithIds;
+    let filter = new GoodsFilterById(ids);
+    return filter.apply(goods);
 }
 getGoodsWithIds(new Set([1,5,6]))
 
