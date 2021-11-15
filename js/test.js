@@ -25,13 +25,12 @@ const listener = {
      */
     on: function(event, context, handler) {
          let handlerContext = [handler,context];
-         let handlersArray = [];
-         if (!this.handlers.has(event)){
+         if (this.handlers.has(event)){
+             this.handlers.get(event).push(handlerContext);
+         } else {
+             let handlersArray = [];
              handlersArray.push(handlerContext);
              this.handlers.set(event, handlersArray);
-         }
-         else {
-             this.handlers.get(event).push(handlerContext);
          }
     },
     /**
@@ -42,7 +41,6 @@ const listener = {
      * @param event - Событие, для которого должны выполниться зарегистрированные обработчики
      */
     submit: function(event) {
-
         let handlerArray = this.handlers.get(event);
         for (const item of handlerArray){
             let context = item[1];
@@ -69,15 +67,4 @@ listener.on("next_level", playerWithBoost, function() {
 listener.on("boost", playerWithBoost, function() {
     this.score += 3;
 });
-
-console.log(listener)
-
-listener.submit("next_level");
-console.log(simplePlayer, playerWithBoost)
-
-listener.submit("boost");
-console.log(simplePlayer, playerWithBoost)
-
-listener.submit("next_level");
-console.log(simplePlayer, playerWithBoost)
 
