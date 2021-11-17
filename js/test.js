@@ -24,8 +24,14 @@ const listener = {
      * @param {Function} handler - Обработчик события event для объекта context; не имеет входных параметров
      */
     on: function(event, context, handler) {
-         let handlerContext = [context, handler];
-         this.handlers.set(event, handlerContext);
+         let handlerContext = [handler,context];
+         if (this.handlers.has(event)){
+             this.handlers.get(event).push(handlerContext);
+         } else {
+             let handlersArray = [];
+             handlersArray.push(handlerContext);
+             this.handlers.set(event, handlersArray);
+         }
     },
     /**
      * Выполняет все обработчики, которые ранее были зарегистрированы для события event.
@@ -35,7 +41,12 @@ const listener = {
      * @param event - Событие, для которого должны выполниться зарегистрированные обработчики
      */
     submit: function(event) {
-        this.handlers.get(event)[1].call(this.handlers.get(event)[0]);
+        let handlerArray = this.handlers.get(event);
+        for (const item of handlerArray){
+            let context = item[1];
+            let handler = item[0];
+            handler.call(context)
+        }
     }
 };
 
@@ -56,13 +67,4 @@ listener.on("next_level", playerWithBoost, function() {
 listener.on("boost", playerWithBoost, function() {
     this.score += 3;
 });
-
-listener.submit("next_level");
-console.log(simplePlayer, playerWithBoost)
-
-listener.submit("boost");
-console.log(simplePlayer, playerWithBoost)
-
-listener.submit("next_level");
-console.log(simplePlayer, playerWithBoost)
 
