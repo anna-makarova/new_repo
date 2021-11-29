@@ -33,7 +33,7 @@ body{
 .goods {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 10px;
 }
 .card {
@@ -79,6 +79,18 @@ body{
     text-align: center;
     box-shadow: 5px 5px 5px #636762;
 }
+.small-popup {
+    position: absolute;
+    right: 1px;
+    width: 40px;
+    background-color: #295329;
+    display: none;
+    font-size: 16px;
+    bottom: 9px;
+    padding: 2px 5px;
+    text-align: left;
+    color: #bddecd;
+}
 .likes:hover ~ .popup {
     display: block;
 }
@@ -117,5 +129,79 @@ body{
 .submit-button:hover {
     background-color: beige;
 }
+@media (max-width: 960px) and (min-width: 800px) {
+    .card {
+        width: 40%;
+    }
+}
+@media (max-width: 800px) and (min-width: 580px) {
+    .card {
+        width: 38%;
+        padding: 10px;
+    }
+    .likes {
+        bottom: 10px;
+        right: 5px;
+        width: 20px;
+        z-index: 1;
+    }
+    .likes:hover ~ .popup {
+        display: none;
+    }
+    .small-popup {
+        display: block;
+    }
+}
+@media (max-width: 580px) and (min-width: 340px){
+    .card {
+        width: 38%;
+        padding: 10px;
+    }
+    .container {
+        grid-template-columns: 4fr ;
+    }
+    .filter {
+        display: none
+    }
+    .likes {
+        bottom: 10px;
+        right: 5px;
+        width: 20px;
+        z-index: 1;
+    }
+    .likes:hover ~ .popup {
+        display: none;
+    }
+    .small-popup {
+        display: block;
+    }
+}
+@media (max-width: 340px) {
+    .card {
+        width: 80%;
+        padding: 10px;
+    }
+    .container {
+        grid-template-columns: 4fr ;
+    }
+    .filter {
+        display: none
+    }
+    .likes {
+        bottom: 10px;
+        right: 5px;
+        width: 20px;
+        z-index: 1;
+    }
+    .likes:hover ~ .popup {
+        display: none;
+    }
+    .small-popup {
+        display: block;
+    }
+}
+
+
+
 
 
